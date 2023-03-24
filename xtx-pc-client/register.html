@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>小兔鲜儿 - 新鲜 惠民 快捷!</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <link rel="shortcut icon" href="./favicon.ico">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/register.css">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_2143783_iq6z4ey5vu.css">
+</head>
+
+<body>
+  <!-- 快捷导航 -->
+  <div class="shortcut">
+    <div class="wrapper">
+      <ul>
+        <li><a href="#">请先登录</a></li>
+        <li><a href="#">免费注册</a></li>
+        <li><a href="#">我的订单</a></li>
+        <li><a href="#">会员中心</a></li>
+        <li><a href="#">帮助中心</a></li>
+        <li><a href="#">在线客服</a></li>
+        <li><a href="#"><span></span>手机版</a></li>
+      </ul>
+    </div>
+  </div>
+  <!-- 头部 -->
+  <div class="header wrapper">
+    <div class="logo">
+      <h1><a href="#">小兔鲜儿</a></h1>
+    </div>
+    <div class="nav">
+      <ul>
+        <li><a href="#">首页</a></li>
+        <li><a href="#">生鲜</a></li>
+        <li><a href="#">美食</a></li>
+        <li><a href="#">餐厨</a></li>
+        <li><a href="#">电器</a></li>
+        <li><a href="#">居家</a></li>
+        <li><a href="#">洗护</a></li>
+        <li><a href="#">孕婴</a></li>
+        <li><a href="#">服装</a></li>
+      </ul>
+    </div>
+    <div class="search">
+      <input type="text" placeholder="搜一搜">
+      <span></span>
+    </div>
+    <div class="car">
+      <span>2</span>
+    </div>
+  </div>
+  <div class="xtx-wrapper">
+    <div class="container">
+      <!-- 卡片 -->
+      <div class="xtx-card">
+        <h3>新用户注册</h3>
+        <form class="xtx-form">
+          <div data-prop="username" class="xtx-form-item">
+            <span class="iconfont icon-zhanghao"></span>
+            <input name="username" type="text" placeholder="设置用户名称">
+            <span class="msg"></span>
+          </div>
+          <div data-prop="phone" class="xtx-form-item">
+            <span class="iconfont icon-shouji"></span>
+            <input name="phone" type="text" placeholder="输入手机号码  ">
+            <span class="msg"></span>
+          </div>
+          <div data-prop="code" class="xtx-form-item">
+            <span class="iconfont icon-zhibiaozhushibiaozhu"></span>
+            <input name="code" type="text" placeholder="短信验证码">
+            <span class="msg"></span>
+            <a class="code" href="javascript:;">发送验证码</a>
+          </div>
+          <div data-prop="password" class="xtx-form-item">
+            <span class="iconfont icon-suo"></span>
+            <input name="password" type="password" placeholder="设置6至20位字母、数字和符号组合">
+            <span class="msg"></span>
+          </div>
+          <div data-prop="confirm" class="xtx-form-item">
+            <span class="iconfont icon-suo"></span>
+            <input name="confirm" type="password" placeholder="请再次输入上面密码">
+            <span class="msg"></span>
+          </div>
+          <div class="xtx-form-item pl50">
+            <i class="iconfont icon-queren"></i>
+            已阅读并同意<i>《用户服务协议》</i>
+          </div>
+          <div class="xtx-form-item">
+            <button class="submit">下一步</button>
+            <!-- <a class="submit" href="javascript:;">下一步</a> -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- 版权区域 -->
+  <div class="footer">
+    <div class="wrapper">
+      <div class="top">
+        <ul>
+          <li><span>价格亲民</span></li>
+          <li><span>物流快捷</span></li>
+          <li><span>品质新鲜</span></li>
+        </ul>
+      </div>
+      <div class="bottom">
+        <p>
+          <a href="#">关于我们</a>
+          <a href="#">帮助中心</a>
+          <a href="#"> 售后服务</a>
+          <a href="#">配送与验收</a>
+          <a href="#">商务合作</a>
+          <a href="#">搜索推荐</a>
+          <a href="#">友情链接</a>
+        </p>
+        <p>CopyRight @ 小兔鲜儿</p>
+      </div>
+    </div>
+  </div>
+  <script>
+    // 1.发生短信验证码模块
+    const code = document.querySelector('.code')
+    let flag = true
+    code.addEventListener('click', function () {
+      if (flag) {
+        flag = false
+        let i = 5
+        code.innerHTML = `0${i}秒后重新获取`
+        let timerId = setInterval(function () {
+          i--
+          code.innerHTML = `0${i}秒后重新获取`
+          if (i === 0) {
+            clearInterval(timerId)
+            code.innerHTML = '重新获取'
+            flag = true
+          }
+        }, 1000)
+      }
+    })
+
+    // 2.用户名验证
+    const username = document.querySelector('[name=username]')
+    // change事件，内容发生变化的时候
+    username.addEventListener('change', verifyName)
+    // 封装函数
+    function verifyName() {
+      // console.log(11);
+      const span = username.nextElementSibling
+      // 定义规则
+      const reg = /^[a-zA-Z0-9-_]{6,10}$/
+      if (!reg.test(username.value)) {
+        // console.log(11);
+        span.innerHTML = '输入不合法，6~10位数字、字母、下划线组成'
+        return false
+      }
+
+      // 合法
+      span.innerHTML = ''
+      return true
+    }
+
+    // 3.手机号验证
+    const phone = document.querySelector('[name=phone]')
+    // change事件，内容发生变化的时候
+    phone.addEventListener('change', verifyPhone)
+    // 封装函数
+    function verifyPhone() {
+      // console.log(11);
+      const span = phone.nextElementSibling
+      // 定义规则
+      const reg = /^1(3\d|4[5-9]|5[0-35-9]|6[567]|7[0-8]|8\d|9[0-35-9])\d{8}$/
+      if (!reg.test(phone.value)) {
+        // console.log(11);
+        span.innerHTML = '输入不合法，请输入11位手机号'
+        return false
+      }
+
+      // 合法
+      span.innerHTML = ''
+      return true
+    }
+
+
+    // 3.验证码
+    const codeInput = document.querySelector('[name=code]')
+    // change事件，内容发生变化的时候
+    codeInput.addEventListener('change', verifyCode)
+    // 封装函数
+    function verifyCode() {
+      // console.log(11);
+      const span = codeInput.nextElementSibling
+      // 定义规则
+      const reg = /^\d{6}$/
+      if (!reg.test(codeInput.value)) {
+        // console.log(11);
+        span.innerHTML = '输入不合法，请输入6位数字'
+        return false
+      }
+
+      // 合法
+      span.innerHTML = ''
+      return true
+    }
+
+    // 4.密码
+    const password = document.querySelector('[name=password]')
+    // change事件，内容发生变化的时候
+    password.addEventListener('change', verifyPwd)
+    // 封装函数
+    function verifyPwd() {
+      // console.log(11);
+      const span = password.nextElementSibling
+      // 定义规则
+      const reg = /^[a-zA-Z0-9-_]{6,20}$/
+      if (!reg.test(password.value)) {
+        // console.log(11);
+        span.innerHTML = '输入不合法，6~20位数字、字母、下划线组成'
+        return false
+      }
+
+      // 合法
+      span.innerHTML = ''
+      return true
+    }
+
+    // 5.密码再次验证
+    const confirm = document.querySelector('[name=confirm]')
+    // change事件，内容发生变化的时候
+    confirm.addEventListener('change', verifyConfirm)
+    // 封装函数
+    function verifyConfirm() {
+      // console.log(11);
+      const span = confirm.nextElementSibling
+      // 定义规则
+      if (confirm.value !== password.value) {
+        // console.log(11);
+        span.innerHTML = '两次密码输入不一致'
+        return false
+      }
+
+      // 合法
+      span.innerHTML = ''
+      return true
+    }
+
+    // 6.我同意模块
+    const queren = document.querySelector('.icon-queren')
+    queren.addEventListener('click', function () {
+      this.classList.toggle('icon-queren2')
+    })
+
+    // 7.提交模块
+    const form = document.querySelector('form')
+    form.addEventListener('submit', function (e) {
+      // 是否点击确认，class里有没有queren2  
+      if (!queren.classList.contains('icon-queren2')) {
+        alert('请勾选同意协议')
+        e.preventDefault()
+      }
+      // 依次判断上面的文本框有没有通过
+      if (!verifyName() || !verifyPhone() || !verifyCode() || !verifyPwd() || !verifyConfirm()) {
+        e.preventDefault()
+      }
+    })
+  </script>
+</body>
+
+</html>
